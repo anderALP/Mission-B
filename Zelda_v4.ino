@@ -7,13 +7,13 @@
 #define NeoPin 6
 #define BOUNCE_GAP 10         // in mS
 
-#define BT1      4//2  
-#define BT2      3//3  
-#define BT3      2//4  
-#define BT4      8//5  
-#define BT5      7//7
+#define BT1      7//2  
+#define BT2      8//3  
+#define BT3      9//4  
+#define BT4      3//5  
+#define BT5      4//7
 #define BT6      5//8
-#define BTR      9 
+#define BTR      2 
 
 #define BT1_LED      2//0
 #define BT2_LED      1//1
@@ -21,14 +21,14 @@
 #define BT4_LED      5//3
 #define BT5_LED      4//4
 #define BT6_LED      3//5
-#define BTR_LED      6 
+#define BTR_LED      9 
 
-#define S1_LED      7
-#define S2_LED      8
-#define S3_LED      9 
+#define S1_LED      6
+#define S2_LED      7
+#define S3_LED      8 
 
-#define SgnIn    12
-#define SgnOut    11
+#define SgnIn    11
+#define SgnOut    12
 
 
 
@@ -76,7 +76,7 @@ void setup() {
   turn_all_off();
   Serial.begin(9600);
   Serial.println("Begin");
-  delay(2000);
+//  delay(2000);
   
   for (int i=0;i<7;i++){
     pinMode(game_buttons[i], INPUT_PULLUP);
@@ -86,6 +86,7 @@ void setup() {
   pinMode(SgnIn, INPUT_PULLUP);
   
   pinMode(SgnOut, OUTPUT);
+  digitalWrite(SgnOut, HIGH);
   //Serial.println("Strip start");
   strip.show();
   delay(250);
@@ -156,7 +157,7 @@ void loop() {
      break;
      case MENU_RESET:
       Serial.println("Menu reset");
-      digitalWrite(SgnOut, LOW);
+      digitalWrite(SgnOut, HIGH);
 
       if(InStatus == true){
         menu = MENU_INIT;
@@ -204,7 +205,7 @@ void loop() {
       case MENU_WIN:
         Serial.println("Menu win");
 
-        digitalWrite(SgnOut, HIGH);
+        digitalWrite(SgnOut, LOW);
         
         blink_all(Green,Black,20);
 
